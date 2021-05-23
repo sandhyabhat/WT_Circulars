@@ -1,0 +1,28 @@
+.circular__form {
+    display: flex;
+    flex-direction: column;
+    margin: 20px auto;
+    justify-content: center;
+}
+
+.file_input {
+    display: flex;
+}
+
+@media only screen and (min-width: 600px) {
+    .circular__form {
+        max-width: 600px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .circular__form {
+        margin: 20px 20px;
+    }
+}
+
+h1 {
+    text-align: center;
+    margin: 2em auto;
+}
+

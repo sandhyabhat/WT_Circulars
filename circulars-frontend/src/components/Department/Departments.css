@@ -1,0 +1,24 @@
+.departments-grid {
+    display: grid;
+    grid-gap:20px;
+    padding: 2em;
+    justify-self: center;
+    grid-auto-rows: 1fr;
+    grid-template-columns: repeat(auto-fill, 275px);
+}
+
+.departments-flex {
+    display: flex;
+    justify-content: center;
+}
+
+.MuiCard-root{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+  .MuiCardActions-root {
+      display: flex;
+      justify-content: space-between;
+  }

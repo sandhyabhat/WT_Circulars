@@ -1,0 +1,17 @@
+.login {
+    margin: 4em auto;
+    padding: 2em;
+}
+
+
+@media only screen and (min-width: 600px) {
+    .login {
+        width: 80%;
+    }
+}
+
+@media only screen and (min-width: 750px) {
+    .login {
+        width: 500px;
+    }
+}

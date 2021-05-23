@@ -1,0 +1,22 @@
+.file__img {
+    width: 100px;
+    object-fit: contain;
+    margin-bottom: 5px;
+}
+
+.file__card {
+    display: flex;
+    flex-direction: column;
+    padding: 5px 5px 0px 5px;
+    border: 1px solid rgb(196, 187, 187);
+    width: fit-content;
+}
+
+.file__name {
+    color: rgb(172, 169, 169);
+    font-weight: 700;
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
+}
+

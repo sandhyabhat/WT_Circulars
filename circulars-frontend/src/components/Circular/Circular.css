@@ -1,0 +1,31 @@
+.circular__detail {
+    display: flex;
+    flex-direction: column;
+    margin: 20px auto;
+    padding: 30px;
+    max-width: 600px;
+    border: 1px solid rgb(71, 71, 71);
+}
+
+.header__title {
+    font-size: 1.5em;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.header__date {
+    font-size: 0.9em;
+    color: rgb(153, 153, 153);
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.circular__description {
+    text-align: justify;
+    margin-bottom: 30px;
+}
+
+.circular__files {
+    display: flex;
+    justify-content: space-evenly;
+}
