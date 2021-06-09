@@ -17,11 +17,12 @@ const NavBar = () => {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
             <Navbar.Brand href="/">CIRCULARS</Navbar.Brand>
+
             <Nav.Link href="/login">Login</Nav.Link>
             <Nav.Link href="/departments">Departments</Nav.Link>
           </Nav>
         </Navbar.Collapse>
-        <Nav>
+        <NavDropdown>
           <NavDropdown
             title={
               <IconButton color="primary">
@@ -37,7 +38,7 @@ const NavBar = () => {
               Signout
             </NavDropdown.Item>
           </NavDropdown>
-        </Nav>
+        </NavDropdown>
       </Navbar>
     </div>
   );

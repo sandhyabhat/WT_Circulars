@@ -34,18 +34,16 @@ export default function App() {
           </Route>
           <Route path="/departments">
             <NavBar />
-            <Departments/>
+            <Departments />
           </Route>
           <Route path="/post">
             <NavBar />
-            <CircularForm/>
+            <CircularForm />
           </Route>
           <Route path="/">
             <NavBar />
-            <Circulars/>
+            <Circulars />
           </Route>
-          
-          
         </Switch>
       </Router>
     </div>

@@ -19,6 +19,7 @@ const CircularForm = () => {
     } else if (name === "departments") {
       let value = Array.from(
         e.target.selectedOptions,
+
         (option) => option.value
       );
       setFormData({ ...formData, [name]: value });

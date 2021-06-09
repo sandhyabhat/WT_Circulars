@@ -34,11 +34,9 @@ function Departments() {
   return (
     <div className="departments-grid">
       {data.map((dept) => (
-        
-          <div className="departments-flex">
-            <Department dept={dept} />
-          </div>
-        
+        <div className="departments-flex">
+          <Department dept={dept} />
+        </div>
       ))}
     </div>
   );

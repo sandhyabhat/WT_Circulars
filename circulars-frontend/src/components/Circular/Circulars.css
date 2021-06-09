@@ -1,25 +1,31 @@
 .circulars__list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,500px);
-    justify-content: center;
-    grid-column-gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 500px);
+  justify-content: center;
+  grid-column-gap: 20px;
 }
 
 .circulars__search {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 10px;
-    margin: 10px auto;
-    max-width: 500px;
-    
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+  margin: 10px auto;
+  max-width: 500px;
 }
 
 .form-group {
-    margin: 0px 5px;
+  margin: 0px 5px;
 }
 
 .search__date {
-    display: flex;
-    justify-content: space-evenly;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.empty {
+  text-align: center;
+  font-size: larger;
+  color: red;
+  font-weight: bold;
 }

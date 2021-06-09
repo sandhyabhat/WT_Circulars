@@ -55,8 +55,8 @@ function Departments({ dept }) {
       <CardActions>
         <Button
           size="small"
-          style={{backgroundColor:"#1565c0",color:"white"}}
-					variant="contained"
+          style={{ backgroundColor: "#1565c0", color: "white" }}
+          variant="contained"
           onClick={() => history.push(`/${dept.name}`)}
         >
           CIRCULARS

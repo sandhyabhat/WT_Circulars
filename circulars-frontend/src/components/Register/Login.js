@@ -16,7 +16,7 @@ function Login() {
           <Form.Control size="md" type="text" placeholder="ABC" />
         </Form.Group>
 
-        <Button variant="primary" type="submit" size='lg'>
+        <Button variant="primary" type="submit" size="lg">
           Submit
         </Button>
       </Form>

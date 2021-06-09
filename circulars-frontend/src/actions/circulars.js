@@ -1,8 +1,14 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE } from '../constants/actionTypes';
+import {
+  FETCH_ALL,
+  CREATE,
+  UPDATE,
+  DELETE,
+  LIKE,
+} from "../constants/actionTypes";
 
-import * as api from '../api/index.js';
+import * as api from "../api/index.js";
 
-export const getPosts = () => async (dispatch) => {
+export const getCirculars = () => async (dispatch) => {
   try {
     const { data } = await api.fetchPosts();
 

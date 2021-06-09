@@ -1,34 +1,60 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import Circular from "./Circular";
+import axios from "axios";
 import "./Circulars.css";
 
 const Circulars = () => {
+  const [circulars, setCirculars] = useState([]);
+
   const [searchDate, setsearchDate] = useState({
-    name: "",
-    dept_name:"",
+    title: "",
+    dept_name: "",
     search_day: undefined,
+
     search_month: undefined,
     search_year: undefined,
   });
 
+  useEffect(() => {
+    const res = axios
+      .get("api/")
+      .then((response) => setCirculars(response.data))
+      .catch((e) => console.log(e));
+  }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .get("api/search/", {
+        params: searchDate,
+      })
+      .then((response) => {
+        setCirculars(response.data);
+        console.log(response.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setsearchDate({ [name]: value });
+    setsearchDate({ ...searchDate, [name]: value });
   };
-
-
 
   return (
     <div className="circulars">
       <div>
-        <form className="circulars__search">
+        <form
+          action="/api/search/"
+          className="circulars__search"
+          onSubmit={handleSubmit}
+        >
           <div className="form-group">
-            <label for="search_name">Circular name</label>
+            <label for="title">Circular name</label>
             <input
               type="text"
-              name="search_name"
-              id="search_name"
+              name="title"
+              id="title"
               value={searchDate.name}
               class="form-control"
               placeholder="Example: Circular 1"
@@ -36,7 +62,7 @@ const Circulars = () => {
               onChange={handleChange}
             />
           </div>
-          
+
           <div className="form-group">
             <label for="dept_name">Department name</label>
             <input
@@ -50,18 +76,18 @@ const Circulars = () => {
               onChange={handleChange}
             />
           </div>
-          
-          
+
           <div className="search__date">
             <div className="form-group">
               <label for="search_day">Circular Day</label>
               <input
                 type="text"
-                name="search_name"
+                name="search_day"
                 id="search_day"
                 value={searchDate.search_day}
                 class="form-control"
                 placeholder="dd"
+                onChange={handleChange}
                 pattern="[0-9]{2}"
                 title="Day can be 1 to 31"
               />
@@ -103,12 +129,11 @@ const Circulars = () => {
         </form>
       </div>
       <div className="circulars__list">
-        <Circular />
-        <Circular />
-        <Circular />
-        <Circular />
-        <Circular />
-        <Circular />
+        {circulars.length > 0 ? (
+          circulars.map((circular) => <Circular circular={circular} />)
+        ) : (
+          <div className="jumbotron empty">There are no circulars</div>
+        )}
       </div>
     </div>
   );

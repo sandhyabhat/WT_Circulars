@@ -1,6 +1,6 @@
 .departments-grid {
     display: grid;
-    grid-gap:20px;
+    grid-gap: 20px;
     padding: 2em;
     justify-self: center;
     grid-auto-rows: 1fr;
@@ -12,13 +12,13 @@
     justify-content: center;
 }
 
-.MuiCard-root{
+.MuiCard-root {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-  .MuiCardActions-root {
-      display: flex;
-      justify-content: space-between;
-  }
+.MuiCardActions-root {
+    display: flex;
+    justify-content: space-between;
+}
