@@ -5,12 +5,7 @@ const cirularSchema = mongoose.Schema({
   message: String,
   creator: String,
   departments: [String],
-  selectedFile: [
-    {
-      data: Buffer,
-      contentType: String,
-    },
-  ],
+  selectedFile: [String],
   createdAt: {
     type: Date,
     default: new Date(),
