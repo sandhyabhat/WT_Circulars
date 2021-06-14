@@ -8,7 +8,7 @@ const CircularForm = () => {
   const departments = ["CSE", "EEE", "ECE", "ASE"];
   const [formData, setFormData] = useState({
     title: "",
-    description: "",
+    message: "",
     departments: [],
     files: [],
   });
@@ -118,15 +118,15 @@ const CircularForm = () => {
           />
         </div>
         <div class="form-group">
-          <label for="description">Description</label>
+          <label for="message">Description</label>
           <textarea
-            name="description"
-            id="description"
+            name="message"
+            id="message"
             class="form-control"
             placeholder="description"
             onChange={handleChange}
           >
-            {formData.description}
+            {formData.message}
           </textarea>
         </div>
         <div class="form-group">

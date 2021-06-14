@@ -3,8 +3,8 @@ import "./Circular.css";
 import FileCard from "./FileCard";
 
 const Circular = ({ circular }) => {
-  console.log(circular);
   const { title, message, departments, selectedFile, createdAt } = circular;
+  console.log(title, message, departments, selectedFile, createdAt);
   return (
     <div className="circular__detail">
       <div className="circular__header">
@@ -14,8 +14,9 @@ const Circular = ({ circular }) => {
       <p className="circular__description">{message}</p>
 
       <div className="circular__files">
-        <FileCard name="circular1" />
-        <FileCard name="circular2" />
+        {selectedFile.map((url) => (
+          <FileCard name={title} url={url} key={title} />
+        ))}
       </div>
     </div>
   );

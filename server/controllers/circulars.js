@@ -24,6 +24,9 @@ const uploadFile = async (filePath) => {
   try {
     const response = await bucket.upload(filePath, {
       public: true,
+      metadata: {
+        contentDisposition: "inline",
+      },
     });
     // const data = await response.json();
     console.log(`${filePath} uploaded....}`);
