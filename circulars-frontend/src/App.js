@@ -8,44 +8,54 @@ import Departments from "./components/Department/Departments";
 import Circular from "./components/Circular/Circular";
 import Circulars from "./components/Circular/Circulars";
 import CircularForm from "./components/Circular/CircularForm";
+import React, { useState } from "react";
+
+import { authContext } from "./contexts/authContext";
 
 export default function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   return (
-    <div className="App">
-      <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
-        crossorigin="anonymous"
-      />
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-      />
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      />
-      <Router>
-        <Switch>
-          <Route path="/login">
-            <NavBar />
-            <Login />
-          </Route>
-          <Route path="/departments">
-            <NavBar />
-            <Departments />
-          </Route>
-          <Route path="/post">
-            <NavBar />
-            <CircularForm />
-          </Route>
-          <Route path="/">
-            <NavBar />
-            <Circulars />
-          </Route>
-        </Switch>
-      </Router>
-    </div>
+    <authContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
+      <div className="App">
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous"
+        />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+        />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        />
+        <Router>
+          <Switch>
+            <Route path="/login">
+              <NavBar />
+              <Login />
+            </Route>
+            <Route path="/departments">
+              <NavBar />
+              <Departments />
+            </Route>
+            <Route path="/post">
+              <NavBar />
+              <CircularForm />
+            </Route>
+            <Route path="/register">
+              <NavBar />
+              <RegisterForm />
+            </Route>
+            <Route path="/">
+              <NavBar />
+              <Circulars />
+            </Route>
+          </Switch>
+        </Router>
+      </div>
+    </authContext.Provider>
   );
 }

@@ -1,27 +1,64 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Login.css";
 import { Form, Button } from "react-bootstrap";
+import axios from "axios";
+// import UserProfile from "UserProfile.js";
 
-function Login() {
+const Login = () => {
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setData({ ...data, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:5000/auth/login", data)
+      .then((res) => {
+        sessionStorage.setItem("token", res.data.token);
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="login">
-      <Form>
-        <Form.Group controlId="exampleForm.ControlInput1">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control size="md" type="email" placeholder="name@example.com" />
-        </Form.Group>
-
-        <Form.Group controlId="exampleForm.ControlInput1">
-          <Form.Label>Name</Form.Label>
-          <Form.Control size="md" type="text" placeholder="ABC" />
-        </Form.Group>
-
-        <Button variant="primary" type="submit" size="lg">
-          Submit
-        </Button>
-      </Form>
+      <form onSubmit={handleSubmit} method="POST">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="text"
+            name="email"
+            id="email"
+            class="form-control"
+            placeholder="abc@example.com"
+            onChange={handleChange}
+            value={data.email}
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            class="form-control"
+            onChange={handleChange}
+            value={data.password}
+          />
+        </div>
+        <button type="submit" className="btn btn-lg btn-primary">
+          LOGIN
+        </button>
+      </form>
     </div>
   );
-}
+};
 
 export default Login;

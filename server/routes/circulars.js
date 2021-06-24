@@ -3,6 +3,7 @@ import {
   getCirculars,
   getCircular,
   createCircular,
+  deleteCircular,
 } from "../controllers/circulars.js";
 import multer from "multer";
 import path from "path";
@@ -23,5 +24,6 @@ const router = express.Router();
 router.get("/", getCirculars);
 router.get("/search", getCircular);
 router.post("/create", upload.array("files", 10), createCircular);
+router.delete("/delete/:id", deleteCircular);
 
 export default router;

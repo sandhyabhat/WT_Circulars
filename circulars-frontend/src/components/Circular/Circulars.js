@@ -2,6 +2,7 @@ import { React, useState, useEffect } from "react";
 import Circular from "./Circular";
 import axios from "axios";
 import "./Circulars.css";
+import Cookies from "js-cookie";
 
 const Circulars = () => {
   const [circulars, setCirculars] = useState([]);

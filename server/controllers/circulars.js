@@ -89,3 +89,15 @@ export const createCircular = async (req, res) => {
     return res.status(404).json({ message: error.message });
   }
 };
+
+export const deleteCircular = async (req, res) => {
+  try {
+    var data = req.params;
+    console.log(data);
+    res.status(200).json({
+      message: data,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
