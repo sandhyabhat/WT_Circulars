@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./RegisterForm.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -9,7 +9,12 @@ const RegisterForm = () => {
     lname: "",
     email: "",
     password: "",
+    re_password: "",
+    type: "student",
   });
+
+  const [isPasswordsSame, setIsPasswordsSame] = useState(true);
+  const [passwordsNotSameHTML, setPasswordsNotSameHTML] = useState(null);
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -18,6 +23,21 @@ const RegisterForm = () => {
       ...data,
       [name]: value,
     });
+  };
+
+  const checkPasswords = (e) => {
+    if (data.password !== data.re_password) {
+      setIsPasswordsSame(false);
+      setPasswordsNotSameHTML(
+        <p className="text-danger text-small">
+          Passwords are not same. Please recheck the passwords.
+        </p>
+      );
+      console.log(passwordsNotSameHTML);
+    } else {
+      setIsPasswordsSame(true);
+      setPasswordsNotSameHTML(null);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -29,7 +49,7 @@ const RegisterForm = () => {
     <div className="register">
       <h1 style={{ textAlign: "center", margin: "30px" }}>Register</h1>
       <form method="post">
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex", justifyContent: "space-around" }}>
           <div class="form-group">
             <label for="fname">First name</label>
             <input
@@ -56,9 +76,21 @@ const RegisterForm = () => {
           </div>
         </div>
         <div class="form-group">
+          <label for="type">Choose type</label>
+          <select
+            name="type"
+            value={data.type}
+            className="form-control"
+            onChange={handleChange}
+          >
+            <option value="student">Student</option>
+            <option value="teacher">Teacher</option>
+          </select>
+        </div>
+        <div class="form-group">
           <label for="email">Email</label>
           <input
-            type="text"
+            type="email"
             name="email"
             id="email"
             class="form-control"
@@ -74,11 +106,30 @@ const RegisterForm = () => {
             name="password"
             id="password"
             class="form-control"
-            placeholder="Last name"
+            placeholder="Password"
             value={data.password}
             onChange={handleChange}
           />
         </div>
+
+        <div class="form-group">
+          <label for="re_password">Retype Password</label>
+          <input
+            type="password"
+            name="re_password"
+            id="re_password"
+            class="form-control"
+            placeholder="Re-type password"
+            value={data.re_password}
+            onChange={handleChange}
+            onBlur={checkPasswords}
+          />
+          {passwordsNotSameHTML}
+        </div>
+
+        <button type="submit" className="btn-lg btn btn-primary">
+          SUBMIT
+        </button>
       </form>
     </div>
   );
