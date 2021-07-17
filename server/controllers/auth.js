@@ -12,13 +12,24 @@ if (!admin.apps.length)
   });
 
 export const createNewUser = async (req, res) => {
-  const { email, password } = req.body;
+  const { fname, lname, email, password, type } = req.body;
   firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
       // Signed in
       var user = userCredential.user;
+      //insert into firebase realtime database
+      var ref = firebase.database().ref("users");
+      ref.push({
+        fname,
+        lname,
+        email,
+        type,
+        uid: user.uid,
+        displayName: `${fname} ${lname}`,
+      });
+      //insert into firebase realtime database
       res.status(200).json({
         user: user,
         message: "User successfully created",
@@ -65,3 +76,21 @@ export const login = async (req, res) => {
       }
     });
 };
+
+//
+
+export const logout = async (req, res) => {
+  const { token } = req.headers;
+  console.log(token);
+  firebase
+    .auth()
+    .signOut()
+    .then(() => {
+      res.status(200).json({
+        message: "logged out",
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
