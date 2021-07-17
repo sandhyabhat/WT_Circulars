@@ -13,7 +13,7 @@ import "./NavBar.css";
 const NavBar = () => {
   return (
     <div className="navbar">
-      <nav class="navbar navbar-expand-lg navbar-light">
+      <nav class="navbar navbar-expand-lg navbar-dark">
         <a class="navbar-brand" href="/">
           RVCE circulars
         </a>

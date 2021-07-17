@@ -15,6 +15,7 @@ const RegisterForm = () => {
     password: "",
     re_password: "",
     type: "student",
+    department: "CSE",
   });
 
   const [isPasswordsSame, setIsPasswordsSame] = useState(true);
@@ -116,6 +117,20 @@ const RegisterForm = () => {
             <option value="teacher">Teacher</option>
           </select>
         </div>
+
+        <div class="form-group">
+          {/* department label input text */}
+          <label for="department">Department</label>
+          <select
+            name="department"
+            id="department"
+            class="form-control"
+            placeholder="Department"
+            value={data.department}
+            onChange={handleChange}
+          />
+        </div>
+
         <div class="form-group">
           <label for="email">Email</label>
           <input

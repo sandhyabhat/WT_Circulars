@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import "./Login.css";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 // import UserProfile from "UserProfile.js";
 
 const Login = () => {
+  const history = useHistory();
+
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -23,6 +26,7 @@ const Login = () => {
       .then((res) => {
         sessionStorage.setItem("token", res.data.token);
         console.log(res);
+        history.push("/");
       })
       .catch((err) => console.log(err));
   };

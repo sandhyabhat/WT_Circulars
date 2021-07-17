@@ -68,6 +68,30 @@ export const getCircular = async (req, res) => {
 
 export const createCircular = async (req, res) => {
   try {
+    var token = req.header.token;
+    // get the user id from the token in firebase
+    var userId = await admin
+      .auth()
+      .getUser(token)
+      .then(function (user) {
+        return user.uid;
+      })
+      .catch((err) => res.status(404).json({ message: err.message }));
+
+    var ref = firebase.database().ref("users/" + userId);
+    ref
+      .get()
+      .then(async (snapshot) => {
+        var userType = snapshot.val().type;
+        if (userType !== "teacher") {
+          return res
+            .status(404)
+            .json({ message: "You are not authorized to perform this action" });
+        }
+      })
+      .catch((error) => {
+        return res.status(404).json({ message: error.message });
+      });
     var data = req.body;
     data["selectedFile"] = [];
     // console.log(req.files);
@@ -104,18 +128,33 @@ export const deleteCircular = async (req, res) => {
 
 // create a function to update the circulars
 export const updateCircular = async (req, res) => {
-  try {
-    // check if user is authenticated to delete using token from headers
-    // use the token and get user email from firebase
-    // if user is not authenticated, return error
-    // if user is authenticated, get the user email from the token
-    // if user email is not found in the database, return error
+  var token = req.header.token;
+  // get the user id from the token in firebase
+  var userId = await admin
+    .auth()
+    .getUser(token)
+    .then(function (user) {
+      return user.uid;
+    })
+    .catch((err) => res.status(404).json({ message: err.message }));
 
-    var data = req.body;
-    console.log(data);
-    const circular = await CircularModel.update(data);
-    return res.status(200).json(circular);
-  } catch (error) {
-    return res.status(404).json({ message: error.message });
-  }
+  var ref = firebase.database().ref("users/" + userId);
+  ref
+    .get()
+    .then(async (snapshot) => {
+      var userType = snapshot.val().type;
+      if (userType === "teacher") {
+        var data = req.body;
+        console.log(data);
+        const circular = await CircularModel.update(data);
+        return res.status(200).json(circular);
+      } else {
+        res
+          .status(404)
+          .json({ message: "You are not authorized to perform this action" });
+      }
+    })
+    .catch((error) => {
+      return res.status(404).json({ message: error.message });
+    });
 };

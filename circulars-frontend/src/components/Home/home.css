@@ -1,0 +1,82 @@
+:root {
+  --flickr-pink: #f72585ff;
+  --byzantine: #b5179eff;
+  --purple: #7209b7ff;
+  --purple-2: #560badff;
+  --trypan-blue: #480ca8ff;
+  --trypan-blue-2: #3a0ca3ff;
+  --persian-blue: #3f37c9ff;
+  --ultramarine-blue: #4361eeff;
+  --dodger-blue: #4895efff;
+  --vivid-sky-blue: #4cc9f0ff;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  place-items: center;
+  justify-content: space-around;
+}
+
+.header_img {
+  height: 6.25rem;
+  width: 6.25rem;
+  color: var(--purple);
+}
+
+.header_title {
+  /* Generate good CSS for title */
+  font-size: 2.5rem;
+  line-height: 2.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+
+  /* Good colors and font for logo title */
+  font-weight: 500;
+  font-family: "Open Sans", sans-serif;
+  color: var(--flickr-pink);
+}
+
+.logo_color {
+  color: var(--purple);
+}
+
+.content {
+  margin: 3.25rem 0;
+  width: 100%;
+}
+
+.features {
+  /* Grid with 2 columns */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1rem;
+}
+
+.section_heading {
+  /* center text */
+  text-align: center;
+  /* padding on top and bottom 3rem */
+  padding: 3rem 0;
+}
+
+.feature_list {
+  list-style-type: none;
+}
+
+.feature_name {
+  color: var(--flickr-pink);
+}
+
+.feature {
+  padding: 0.2rem;
+}
+
+.feature_list > li {
+  margin: 10px 0;
+}

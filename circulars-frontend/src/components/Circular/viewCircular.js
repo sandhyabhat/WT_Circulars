@@ -4,7 +4,7 @@ import axios from "axios";
 import useHistory from "react-router-dom";
 import FileBase64 from "react-file-base64";
 
-const CircularForm = () => {
+const ViewCircular = () => {
   const departments = ["CSE", "EEE", "ECE", "ASE"];
   const [formData, setFormData] = useState({
     title: "",
@@ -59,8 +59,6 @@ const CircularForm = () => {
     const config = {
       headers: {
         "content-type": "multipart/form-data",
-        // get from session token and add it to header
-        token: window.localStorage.getItem("token"),
       },
     };
 
@@ -76,6 +74,21 @@ const CircularForm = () => {
       console.log(formData.files[i]);
       fd.append("files", formData.files[i]);
     }
+
+    /* var base64files = [];
+    for (var i = 0; i < formData.files.length; i++) {
+      var f = formData.files[i];
+      getBase64(f)
+        .then((result) => {
+          base64files[i] = result;
+          // console.log("File Is", f);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+
+    setFo rmData({ ...formData, ["files"]: base64files });*/
 
     axios
       .post("http://localhost:5000/api/create", fd, config)
@@ -155,4 +168,4 @@ const CircularForm = () => {
   );
 };
 
-export default CircularForm;
+export default ViewCircular;

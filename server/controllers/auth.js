@@ -12,14 +12,26 @@ if (!admin.apps.length)
   });
 
 export const createNewUser = async (req, res) => {
-  const { email, password } = req.body;
+  const { fname, lname, email, password, type } = req.body;
   const response = await firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
     .then((user) => {
-      user.user.res.status(500).json({
+      var ref = firebase.database().ref("users/" + user.user.uid);
+      ref.set({
+        fname,
+        lname,
+        email,
+        type,
+        displayName: `${fname} ${lname}`,
+      });
+
+      //insert into firebase realtime database
+      res.status(200).json({
+        user: user,
         message: "User successfully created",
       });
+      // ...
     })
     .catch((error) => {
       var errorCode = error.code;
@@ -35,28 +47,6 @@ export const createNewUser = async (req, res) => {
       }
       console.log(error);
     });
-
-  /* res.status(500).json({
-    user: response.user,
-    message: "User successfully created",
-  }); */
-
-  /* firebase
-    .auth()
-    .createUserWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-      // Signed in
-      var user = userCredential.user;
-      res.status(500).json({
-        user: user,
-        message: "User successfully created",
-      });
-      // ...
-    })
-    .catch((error) => {
-      var errorMessage = error.message;
-      console.log(errorMessage);
-    }); */
 };
 
 export const verifyToken = async (req, res) => {
@@ -77,7 +67,7 @@ export const login = async (req, res) => {
     .then(async (response) => {
       const token = await response["user"].getIdToken();
       console.log(token);
-      res.status(500).json({
+      res.status(200).json({
         email: response["user"]["email"],
         token: token,
         message: "success",
@@ -90,5 +80,21 @@ export const login = async (req, res) => {
           message: "no user",
         });
       }
+    });
+};
+
+export const logout = async (req, res) => {
+  const { token } = req.headers;
+  console.log(token);
+  firebase
+    .auth()
+    .signOut()
+    .then(() => {
+      res.status(200).json({
+        message: "logged out",
+      });
+    })
+    .catch((err) => {
+      console.log(err);
     });
 };

@@ -11,6 +11,7 @@ import CircularForm from "./components/Circular/CircularForm";
 import React, { useState } from "react";
 
 import { authContext } from "./contexts/authContext";
+import Routes from "./components/routes/Routes";
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -31,31 +32,8 @@ export default function App() {
           rel="stylesheet"
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
         />
-        <Router>
-          <Switch>
-            <Route path="/login">
-              <NavBar />
-              <Login />
-            </Route>
-            <Route path="/departments">
-              <NavBar />
-              <Departments />
-            </Route>
-            <Route path="/post">
-              <NavBar />
-              <CircularForm />
-            </Route>
-            <Route path="/register">
-              <NavBar />
-              <RegisterForm />
-            </Route>
-            <Route path="/">
-              <NavBar />
-              <Circulars />
-            </Route>
-          </Switch>
-        </Router>
       </div>
+      <Routes />
     </authContext.Provider>
   );
 }
