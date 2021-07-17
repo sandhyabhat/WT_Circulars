@@ -101,3 +101,21 @@ export const deleteCircular = async (req, res) => {
     console.log(err);
   }
 };
+
+// create a function to update the circulars
+export const updateCircular = async (req, res) => {
+  try {
+    // check if user is authenticated to delete using token from headers
+    // use the token and get user email from firebase
+    // if user is not authenticated, return error
+    // if user is authenticated, get the user email from the token
+    // if user email is not found in the database, return error
+
+    var data = req.body;
+    console.log(data);
+    const circular = await CircularModel.update(data);
+    return res.status(200).json(circular);
+  } catch (error) {
+    return res.status(404).json({ message: error.message });
+  }
+};

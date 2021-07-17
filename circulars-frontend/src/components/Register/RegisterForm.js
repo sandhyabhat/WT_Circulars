@@ -2,8 +2,12 @@ import React, { useState, useEffect } from "react";
 import "./RegisterForm.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 const RegisterForm = () => {
+  const history = useHistory();
+
   const [data, setData] = useState({
     fname: "",
     lname: "",
@@ -43,12 +47,37 @@ const RegisterForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(data);
+
+    axios
+      .post("http://localhost:5000/auth/create", data)
+      .then((response) => {
+        console.log(response);
+        if (response.status === 200) {
+          history.push("/login");
+          // if response is not successful show a message
+        }
+      })
+      .catch((error) => {
+        console.log(error.message);
+
+        setData({
+          ...data,
+          password: "",
+          re_password: "",
+        });
+        setIsPasswordsSame(true);
+        setPasswordsNotSameHTML(null);
+      });
   };
+
+  useEffect(() => {
+    checkPasswords();
+  }, []);
 
   return (
     <div className="register">
       <h1 style={{ textAlign: "center", margin: "30px" }}>Register</h1>
-      <form method="post">
+      <form method="post" onSubmit={handleSubmit}>
         <div style={{ display: "flex", justifyContent: "space-around" }}>
           <div class="form-group">
             <label for="fname">First name</label>
