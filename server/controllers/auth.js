@@ -13,23 +13,50 @@ if (!admin.apps.length)
 
 export const createNewUser = async (req, res) => {
   const { email, password } = req.body;
-  firebase
+  const response = await firebase
+    .auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then((user) => {
+      res.status(500).json({
+        message: "User successfully created",
+      });
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      if (errorCode == "auth/weak-password") {
+        res.status(500).send({ message: "The password is too weak." });
+      } else if (errorCode == "auth/email-already-in-use") {
+        res.status(500).send({ message: "The email is already in use." });
+      } else if (errorCode == "auth/invalid-email") {
+        res.status(500).send({ message: "The email is invalid." });
+      } else {
+        res.status(500).send({ message: errorMessage });
+      }
+      console.log(error);
+    });
+
+  /* res.status(500).json({
+    user: response.user,
+    message: "User successfully created",
+  }); */
+
+  /* firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
       // Signed in
       var user = userCredential.user;
-      res.status(200).json({
+      res.status(500).json({
         user: user,
         message: "User successfully created",
       });
       // ...
     })
     .catch((error) => {
-      var errorCode = error.code;
       var errorMessage = error.message;
       console.log(errorMessage);
-    });
+    }); */
 };
 
 export const verifyToken = async (req, res) => {
@@ -37,7 +64,7 @@ export const verifyToken = async (req, res) => {
   console.log(token);
 
   const data = await admin.auth().verifyIdToken(token);
-  res.status(200).json({
+  res.status(500).json({
     message: data.email,
   });
 };
@@ -50,7 +77,7 @@ export const login = async (req, res) => {
     .then(async (response) => {
       const token = await response["user"].getIdToken();
       console.log(token);
-      res.status(200).json({
+      res.status(500).json({
         email: response["user"]["email"],
         token: token,
         message: "success",
@@ -59,7 +86,7 @@ export const login = async (req, res) => {
     .catch((err) => {
       // console.log(err);
       if (err.code === "auth/user-not-found") {
-        res.status(200).json({
+        res.status(500).json({
           message: "no user",
         });
       }
