@@ -17,7 +17,7 @@ export const createNewUser = async (req, res) => {
     .auth()
     .createUserWithEmailAndPassword(email, password)
     .then((user) => {
-      res.status(500).json({
+      user.user.res.status(500).json({
         message: "User successfully created",
       });
     })
